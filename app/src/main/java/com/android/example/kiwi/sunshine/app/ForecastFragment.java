@@ -6,6 +6,7 @@ package com.android.example.kiwi.sunshine.app;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -112,12 +113,9 @@ public class ForecastFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String forecast = mForecastAdapter.getItem(position);
-                Toast toast = Toast.makeText(getActivity(), forecast, Toast.LENGTH_SHORT);
-
-                //To set customized Gravity for Toast
-                //toast.setGravity(Gravity.BOTTOM. | Gravity.CENTER, 0, 0);
-
-                toast.show();
+                Intent intent = new Intent(getActivity(), DetailActivity.class)
+                        .putExtra(Intent.EXTRA_TEXT, forecast);
+                startActivity(intent);
             }
         });
         return rootView;
