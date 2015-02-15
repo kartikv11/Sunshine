@@ -5,20 +5,24 @@ package com.android.example.kiwi.sunshine.app;
  */
 
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.format.Time;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -104,7 +108,18 @@ public class ForecastFragment extends Fragment {
         ListView listview = (ListView) rootView.findViewById(R.id.listview_forecast);
         //Setting an adapter
         listview.setAdapter(mForecastAdapter);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String forecast = mForecastAdapter.getItem(position);
+                Toast toast = Toast.makeText(getActivity(), forecast, Toast.LENGTH_SHORT);
 
+                //To set customized Gravity for Toast
+                //toast.setGravity(Gravity.BOTTOM. | Gravity.CENTER, 0, 0);
+
+                toast.show();
+            }
+        });
         return rootView;
     }
 
